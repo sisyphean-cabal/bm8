@@ -39,9 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts.apps.AccountsConfig',
-    'bands.apps.BandsConfig',
-    'genres.apps.GenresConfig',
-    'albums.apps.AlbumsConfig',
     'rest_framework',
     'corsheaders'
 ]
@@ -123,6 +120,7 @@ USE_I18N = True
 
 USE_TZ = True
 
+USER_DETAILS_SERIALIZER = 'rest_auth.views.UserDetailsView'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
