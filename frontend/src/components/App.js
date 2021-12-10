@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Render } from "react-dom";
-
+import ReactDOM from 'react-dom'
 export default class App extends Component {
     constructor(props){
         super(props)
@@ -12,5 +11,5 @@ export default class App extends Component {
 }
 
 const appDiv = document.getElementById("app")
-render(<App />, appDiv)
+ReactDOM.render(<App />, appDiv)
 
