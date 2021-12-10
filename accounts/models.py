@@ -17,7 +17,7 @@ class Band(models.Model):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user_obj = models.OneToOneField(User, on_delete=models.CASCADE)
     genres = models.ManyToManyField(Genre)
     albums = models.ManyToManyField(Album)
     bands = models.ManyToManyField(Band)

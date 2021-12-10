@@ -1,7 +1,7 @@
 from django.urls import path
-
+from .views import ProfileView
 from . import views
 
 urlpatterns = [
-    path(r'', views.registerPage, name="register")
+    path('profile', ProfileView.as_view(), name="Profile")
 ]
