@@ -6,17 +6,18 @@ class Album(models.Model):
     name = models.CharField(max_length=500)
 
 
-class Bands(models.Model):
-    name = models.CharField(max_length=500)
-    albums = models.ManyToManyField(Album)
-
-
-class Genres(models.Model):
+class Genre(models.Model):
     name = models.CharField(max_length=90)
-    bands = models.ManyToManyField(Bands)
-    albums = models.ManyToManyField(Album)
+
+
+class Band(models.Model):
+    name = models.CharField(max_length=500)
+    albums = models.ForeignKey(Album, on_delete=models.CASCADE)
+    genres = models.ManyToManyField(Genre)
 
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    genres = models.ManyToManyField(Genres)
+    genres = models.ManyToManyField(Genre)
+    albums = models.ManyToManyField(Album)
+    band = models.ManyToManyField(Band)
