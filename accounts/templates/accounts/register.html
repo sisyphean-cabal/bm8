@@ -1,4 +1,6 @@
-{% extends base.html %}
+{% extends 'base.html' %}
+
+{% block content %}
 <h1>Register</h1>
 
 <form method="POST" action="">
@@ -6,3 +8,4 @@
     {{ form }}
     <input type="submit" name="Create User">
 </form>
+{% endblock %}
