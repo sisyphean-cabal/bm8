@@ -2,8 +2,8 @@
 
 lib/
 lib/*
-bin/*
 bin/
 .idea
 .idea/*
+__pycache__
 pyvenv.cfg
