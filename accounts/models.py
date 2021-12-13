@@ -18,6 +18,8 @@ class Band(models.Model):
 
 class Profile(models.Model):
     user_obj = models.OneToOneField(User, on_delete=models.CASCADE)
+    biography = models.CharField(max_length=1500)
+    soundcloud = models.CharField(max_length=280)
     genres = models.ManyToManyField(Genre)
     albums = models.ManyToManyField(Album)
     bands = models.ManyToManyField(Band)
