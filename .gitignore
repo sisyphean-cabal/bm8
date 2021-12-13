@@ -1,5 +1,9 @@
-# created by virtualenv automatically
+# docker volume for postgresql
+data/*
+data
 
+
+# created by virtualenv automatically
 lib/
 lib/*
 bin/
