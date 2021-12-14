@@ -1,7 +1,7 @@
 # docker volume for postgresql
 data/db/*
 
-
+*.pyc
 
 # created by virtualenv automatically
 lib/
