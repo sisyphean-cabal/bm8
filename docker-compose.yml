@@ -4,7 +4,7 @@ services:
   django:
     build: .
     container_name: api
-    command: python manage.py runserver 0.0.0.0:8000
+    command: ["./shell/wait.sh", "db:5432", "python", "manage.py", "runserver",  "0.0.0.0:8000"]
     volumes:
     - .:/usr/src/bm8_api
     ports:
@@ -12,11 +12,10 @@ services:
     depends_on:
       - db
   db:
-    image: postgres
+    image: postgis/postgis:latest
     container_name: pgdb
-    volumes:
-      - ./data/db:/var/lib/postgresql/data
     environment:
         - POSTGRES_NAME=postgres
         - POSTGRES_USER=postgres
         - POSTGRES_PASSWORD=bm152612
+  
