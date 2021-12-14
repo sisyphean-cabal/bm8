@@ -15,4 +15,5 @@ class ProfileSerializer(serializers.ModelSerializer):
         user = User.objects.create( 
         username=valid_data['username'],
         password=valid_data['password'],)
+        
         return user
