@@ -2,6 +2,7 @@
 data/db/*
 
 *.pyc
+__pycache__
 
 # created by virtualenv automatically
 lib/
