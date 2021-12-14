@@ -1,3 +1,25 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-# Create your models here.
+
+class Album(models.Model):
+    name = models.CharField(max_length=500)
+
+
+class Genre(models.Model):
+    name = models.CharField(max_length=90)
+
+
+class Band(models.Model):
+    name = models.CharField(max_length=500)
+    albums = models.ForeignKey(Album, on_delete=models.CASCADE)
+    genres = models.ManyToManyField(Genre)
+
+
+class Profile(models.Model):
+    user_obj = models.OneToOneField(User, on_delete=models.CASCADE)
+    biography = models.CharField(max_length=1500)
+    soundcloud = models.CharField(max_length=280)
+    genres = models.ManyToManyField(Genre)
+    albums = models.ManyToManyField(Album)
+    bands = models.ManyToManyField(Band)
