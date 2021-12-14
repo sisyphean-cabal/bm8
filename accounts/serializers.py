@@ -10,10 +10,10 @@ class ProfileSerializer(serializers.ModelSerializer):
                   'user_permissions', 'is_staff', 'is_active',
                   'is_superuser', 'last_login', 'date_joined')
 
-    # create a user below 
+    # create a user belo 
     def create(self, valid_data):
         user = User.objects.create( 
         username=valid_data['username'],
         password=valid_data['password'],)
-        
+
         return user
