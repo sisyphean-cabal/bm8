@@ -1,5 +1,7 @@
+from copy import error
 from rest_framework import generics
 from rest_framework import serializers
+from rest_framework.exceptions import ErrorDetail
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.serializers import Serializer
@@ -16,3 +18,7 @@ def registration_View(req):
             data['response'] = "registration successful"
             data['email'] = account.email
             data['username'] = account.username
+        else:
+            data = serialzer.errors
+        return Response(data)
+        
