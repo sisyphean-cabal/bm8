@@ -10,10 +10,20 @@ class ProfileSerializer(serializers.ModelSerializer):
                   'user_permissions', 'is_staff', 'is_active',
                   'is_superuser', 'last_login', 'date_joined')
 
-    # create a user belo 
-    def create(self, valid_data):
-        user = User.objects.create( 
-        username=valid_data['username'],
-        password=valid_data['password'],)
+class RegistrationSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(style={'input_type': 'password'}, write_only=True)
 
-        return user
+    class Meta:
+        model = User
+        fields = ['email', 'username', 'password', 'password2']
+        extra_kwags = {
+            'password': {'write_only': True}
+        }
+
+    def save(self):
+        account = User(
+            email=self.validated_data['email'],
+            username=self.validated_data['username']
+            
+        )
+    
