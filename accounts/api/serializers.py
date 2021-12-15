@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from django.db.models import User, Album, Band, Genre
+from accounts.models import User, Album, Band, Genre
 
 
 class ProfileSerializer(serializers.ModelSerializer):
