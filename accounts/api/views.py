@@ -11,7 +11,7 @@ from accounts.api.serializers import RegistrationSerializer
 
 @api_view(['POST',])
 def registration_View(req):
-    if req.method == 'POST':
+    if req.body.password != req.body.password_confirmation:
         return Response({'error': 'no match'}, status=status.HTTP_400_BAD_REQUEST)
         # if req.data.password != req.data.password_confirmation:
         #     return print(req.data)
