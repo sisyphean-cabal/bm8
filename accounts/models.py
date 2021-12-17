@@ -15,12 +15,11 @@ class User(AbstractBaseUser):
     email = models.CharField(max_length=200, null=True, blank=True, unique=True)
     phone_number = PhoneNumberField(null=True, blank=True, unique=True)
 
-
     class Meta:
         constraints = [
             models.CheckConstraint(
-                name="%(app_label)s_%(class)s_userna_isnull=Falseme_phonenumber",
-                check=(~models.Q(phone_number__isnull=False, email_isnull=False))
+                name="%(app_label)s_%(class)s_email_or_phone_number",
+                check=(models.Q(phone_number__isnull=False)|models.Q(email__isnull=False))
             )
         ]
 
