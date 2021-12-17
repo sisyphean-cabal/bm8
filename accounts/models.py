@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import constraints
 from phonenumber_field.modelfields import PhoneNumberField
-from phonenumber_field.phonenumber import PhoneNumber
+
 
 class Profile(models.Model):
     user_obj = models.OneToOneField(User, on_delete=models.CASCADE)

@@ -16,13 +16,11 @@ def registration_View(req):
     if req.method == 'POST':
         serializer = RegistrationSerializer(data=req.data)
         data = {}
-        if req.data.password != req.data.password_confirmation:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
         if serializer.is_valid():
             account = serializer.save()
             data['response'] = "registration successful"
             data['email'] = account.email
-            data['username'] = account.username
+            data['phone_number']
         else:
             data = serializer.errors
         return Response(data)
