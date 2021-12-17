@@ -20,5 +20,8 @@ class User(AbstractBaseUser):
                 check=(models.Q(phone_number__isnull=False)|models.Q(email__isnull=False))
             )
         ]
+    
+    def __str__(self):
+        return self.title
 
 
