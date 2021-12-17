@@ -11,8 +11,8 @@ from rest_framework import status
 from django.shortcuts import render
 from accounts.api.serializers import RegistrationSerializer
 
-@api_view(['POST',])
-def registration_View(req):
+@api_view(['POST'])
+def registration_view(req):
     if req.method == 'POST':
         serializer = RegistrationSerializer(data=req.data)
         data = {}
@@ -24,4 +24,3 @@ def registration_View(req):
         else:
             data = serializer.errors
         return Response(data)
-        
