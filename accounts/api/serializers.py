@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from accounts.models import User, Album, Band, Genre
-
+from rest_framework.validators import UniqueValidator
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,6 +14,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
     password = serializers.CharField(style={'input_type': 'password'}, write_only=True)
     password_confirmation = serializers.CharField(max_length=280)
     class Meta:
+        model = User
         fields = ['email', 'username', 'password', 'passwordConfirmation']
         extra_kwargs = {
             'password': {'write_only': True}
