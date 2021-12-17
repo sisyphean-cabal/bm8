@@ -7,9 +7,7 @@ from phonenumber_field.phonenumber import PhoneNumber
 
 class Profile(models.Model):
     user_obj = models.OneToOneField(User, on_delete=models.CASCADE)
-    biography = models.CharField(max_length=1500)
-    soundcloud = models.CharField(max_length=280)
-    phone_number = PhoneNumberField(blank=True)
+
 
 class User(AbstractBaseUser):
     email = models.CharField(max_length=200, null=True, blank=True, unique=True)

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from accounts.models import User, Album, Band, Genre
+from accounts.models import User
 from rest_framework.validators import UniqueValidator
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -19,6 +19,8 @@ class RegistrationSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'password': {'write_only': True}
         }
+
+        
 
     def save(self):
         account = User(
