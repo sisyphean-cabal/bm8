@@ -20,7 +20,7 @@ def registration_view(req):
             account = serializer.save()
             data['response'] = "registration successful"
             data['email'] = account.email
-            data['phone_number']
+            data['phone_number'] = account.phone_number
         else:
             data = serializer.errors
         return Response(data)

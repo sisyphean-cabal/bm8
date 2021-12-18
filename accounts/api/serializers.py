@@ -21,10 +21,12 @@ class RegistrationSerializer(serializers.ModelSerializer):
         }
 
     def save(self):
-        account = User(
-            email=self.validated_data['email'],
-            username=self.validated_data['username']
-        )
+        keys = {}
+        if 'email' in self.validated_data:
+            keys['email'] = self.validated_data['email']
+        if 'phone_number' in self.validated_data:
+            keys['phone_number'] = self.validated_data['phone_number']
+        account = User(**keys)
         password = self.validated_data['password']
 
         account.set_password(password)
