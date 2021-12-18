@@ -9,7 +9,8 @@ from rest_framework.decorators import api_view
 from rest_framework.serializers import Serializer
 from rest_framework import status
 from django.shortcuts import render
-from accounts.api.serializers import RegistrationSerializer
+from accounts.api.serializers import RegistrationSerializer, UserSerializer
+from accounts.models import User
 
 @api_view(['POST'])
 def registration_view(req):
@@ -24,3 +25,7 @@ def registration_view(req):
         else:
             data = serializer.errors
         return Response(data)
+
+class RegisterLookUp(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer

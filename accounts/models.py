@@ -1,12 +1,6 @@
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
-from django.contrib.auth.models import User
-from django.db.models import constraints
 from phonenumber_field.modelfields import PhoneNumberField
-
-
-class Profile(models.Model):
-    user_obj = models.OneToOneField(User, on_delete=models.CASCADE)
 
 
 class User(AbstractBaseUser):
@@ -25,3 +19,5 @@ class User(AbstractBaseUser):
         return self.title
 
 
+class Profile(models.Model):
+    user_obj = models.OneToOneField(User, on_delete=models.CASCADE)
