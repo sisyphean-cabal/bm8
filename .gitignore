@@ -1,6 +1,8 @@
 # docker volume for postgresql
 data/db/*
 
+.vscode
+
 *.pyc
 __pycache__
 
