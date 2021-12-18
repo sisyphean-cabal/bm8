@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from accounts.models import User
-from rest_framework.validators import UniqueValidator
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:

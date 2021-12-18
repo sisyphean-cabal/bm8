@@ -1,5 +1,4 @@
 from django.urls import path
-from django.urls.resolvers import URLPattern
 from accounts.api.views import(
     RegisterLookUp,
     registration_view,
