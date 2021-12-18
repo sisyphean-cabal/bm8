@@ -1,25 +1,27 @@
+from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
 from django.contrib.auth.models import User
-
-
-class Album(models.Model):
-    name = models.CharField(max_length=500)
-
-
-class Genre(models.Model):
-    name = models.CharField(max_length=90)
-
-
-class Band(models.Model):
-    name = models.CharField(max_length=500)
-    albums = models.ForeignKey(Album, on_delete=models.CASCADE)
-    genres = models.ManyToManyField(Genre)
+from django.db.models import constraints
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Profile(models.Model):
     user_obj = models.OneToOneField(User, on_delete=models.CASCADE)
-    biography = models.CharField(max_length=1500)
-    soundcloud = models.CharField(max_length=280)
-    genres = models.ManyToManyField(Genre)
-    albums = models.ManyToManyField(Album)
-    bands = models.ManyToManyField(Band)
+
+
+class User(AbstractBaseUser):
+    email = models.CharField(max_length=200, null=True, blank=True, unique=True)
+    phone_number = PhoneNumberField(null=True, blank=True, unique=True)
+
+    class Meta:
+        constraints = [
+            models.CheckConstraint(
+                name="%(app_label)s_%(class)s_email_or_phone_number",
+                check=(models.Q(phone_number__isnull=False)|models.Q(email__isnull=False))
+            )
+        ]
+    
+    def __str__(self):
+        return self.title
+
+
