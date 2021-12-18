@@ -1,10 +1,6 @@
-from contextlib import nullcontext
-from django.http import request
-from django.test import TestCase, Client
-from rest_framework.test import APIClient, APIRequestFactory, APITestCase
+from django.test import TestCase
+from rest_framework.test import APIClient, APIRequestFactory
 from accounts.api.views import registration_view
-from django.db.models import User
-from django.db import IntegrityError
 import json
 
 class RegisterTest(TestCase):

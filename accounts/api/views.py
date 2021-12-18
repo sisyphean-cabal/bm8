@@ -1,14 +1,6 @@
-from copy import error
-from django.http.response import HttpResponse
 from rest_framework import generics
-from rest_framework import serializers
-from rest_framework import response
-from rest_framework.exceptions import ErrorDetail
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from rest_framework.serializers import Serializer
-from rest_framework import status
-from django.shortcuts import render
 from accounts.api.serializers import RegistrationSerializer, UserSerializer
 from accounts.models import User
 

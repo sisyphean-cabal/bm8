@@ -22,6 +22,5 @@ urlpatterns = [
 
 
     # REST
-    path('api/', include('accounts.urls')),
     path('api/account/', include('accounts.api.urls', 'account_api')),
 ]
