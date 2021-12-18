@@ -16,7 +16,7 @@ class User(AbstractBaseUser):
         ]
     
     def __str__(self):
-        return self.title
+        return self.email
 
 
 class Profile(models.Model):
