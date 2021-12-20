@@ -111,7 +111,9 @@ DATABASES = {
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
+    {
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
+    },
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
@@ -132,25 +134,46 @@ USE_TZ = True
 USER_DETAILS_SERIALIZER = "rest_auth.views.UserDetailsView"
 
 # Logging
+# Black turns formatting off through code comments.
 
+# fmt: off
 LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {
-        "verbose": {"format": "{levelname} {asctime} {module} {process:d} {thread:d} {message}", "style": "{"},
-        "simple": {"format": "{levelname} {message}", "style": "{"},
-    },
-    "filters": {"require_debug_true": {"()": "django.utils.log.RequireDebugTrue"}},
-    "handlers": {
-        "console": {
-            "level": "INFO",
-            "filters": ["require_debug_true"],
-            "class": "logging.StreamHandler",
-            "formatter": "simple",
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
         },
-        "to_file": {"level": "ERROR", "class": "logging.FileHandler", "filename": "./logs/error.log"},
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
     },
-    "loggers": {"django": {"handlers": ["console", "to_file"], "propagate": True}},
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'to_file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': './logs/error.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'to_file'],
+            'propagate': True,
+        },
+    }
 }
 
 # Static files (CSS, JavaScript, Images)
