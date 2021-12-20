@@ -170,7 +170,8 @@ LOGGING = {
         'file_info': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': './logs/info_logs.log'
+            'filename': './logs/info_logs.log',
+            'formatter': 'verbose',
         },
     },
     'loggers': {
