@@ -4,6 +4,6 @@
 max-line-length = 119
 extend-ignore =
     # See https://github.com/PyCQA/pycodestyle/issues/373
-    E203, D203, BLK100
+    E203
 max-complexity = 10
 exclude = .git,__pycache__,docs/source/conf.py,old,build,dist,migrations
