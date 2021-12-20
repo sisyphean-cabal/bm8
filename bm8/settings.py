@@ -157,20 +157,26 @@ LOGGING = {
     },
     'handlers': {
         'console': {
-            'level': 'INFO',
             'filters': ['require_debug_true'],
             'class': 'logging.StreamHandler',
             'formatter': 'simple'
         },
-        'to_file': {
+        'file_error': {
             'level': 'ERROR',
             'class': 'logging.FileHandler',
-            'filename': './logs/error.log',
+            'filename': './logs/error_logs.log',
+            'formatter': 'verbose'
+        },
+        'file_info': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': './logs/info_logs.log'
         },
     },
     'loggers': {
         'django': {
-            'handlers': ['console', 'to_file'],
+            'level': 'DEBUG',
+            'handlers': ['file_error', 'file_info'],
             'propagate': True,
         },
     }
