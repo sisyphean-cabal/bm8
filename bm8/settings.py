@@ -134,8 +134,8 @@ USE_TZ = True
 USER_DETAILS_SERIALIZER = "rest_auth.views.UserDetailsView"
 
 # Logging
-# Black turns formatting off through code comments.
 
+# Black turns formatting off through code comments.
 # fmt: off
 LOGGING = {
     'version': 1,
