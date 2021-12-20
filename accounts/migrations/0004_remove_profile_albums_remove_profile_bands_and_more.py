@@ -7,25 +7,25 @@ import phonenumber_field.modelfields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('accounts', '0003_profile_biography_profile_soundcloud'),
+        ("accounts", "0003_profile_biography_profile_soundcloud"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='profile',
-            name='albums',
+            model_name="profile",
+            name="albums",
         ),
         migrations.RemoveField(
-            model_name='profile',
-            name='bands',
+            model_name="profile",
+            name="bands",
         ),
         migrations.RemoveField(
-            model_name='profile',
-            name='genres',
+            model_name="profile",
+            name="genres",
         ),
         migrations.AddField(
-            model_name='profile',
-            name='phone_number',
+            model_name="profile",
+            name="phone_number",
             field=phonenumber_field.modelfields.PhoneNumberField(blank=True, max_length=128, region=None),
         ),
     ]

@@ -9,45 +9,45 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('auth', '0012_alter_user_first_name_max_length'),
+        ("auth", "0012_alter_user_first_name_max_length"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Album',
+            name="Album",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=500)),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("name", models.CharField(max_length=500)),
             ],
         ),
         migrations.CreateModel(
-            name='Band',
+            name="Band",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=500)),
-                ('albums', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='accounts.album')),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("name", models.CharField(max_length=500)),
+                ("albums", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="accounts.album")),
             ],
         ),
         migrations.CreateModel(
-            name='Genre',
+            name="Genre",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=90)),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("name", models.CharField(max_length=90)),
             ],
         ),
         migrations.CreateModel(
-            name='Profile',
+            name="Profile",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('albums', models.ManyToManyField(to='accounts.Album')),
-                ('band', models.ManyToManyField(to='accounts.Band')),
-                ('genres', models.ManyToManyField(to='accounts.Genre')),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='auth.user')),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("albums", models.ManyToManyField(to="accounts.Album")),
+                ("band", models.ManyToManyField(to="accounts.Band")),
+                ("genres", models.ManyToManyField(to="accounts.Genre")),
+                ("user", models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to="auth.user")),
             ],
         ),
         migrations.AddField(
-            model_name='band',
-            name='genres',
-            field=models.ManyToManyField(to='accounts.Genre'),
+            model_name="band",
+            name="genres",
+            field=models.ManyToManyField(to="accounts.Genre"),
         ),
     ]
