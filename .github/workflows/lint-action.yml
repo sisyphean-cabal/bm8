@@ -1,37 +1,38 @@
-name: lint
+name: Lint
 
-on: [pull_request]
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the main branch
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  black-lint:
+  run-linters:
+    name: Run linters
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: psf/black@stable
-        with:
-           python-version: 3.9
-           line-length: "119"
-      - run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
 
-
-  flake8-lint:
-    runs-on: ubuntu-latest
-    name: Flake8
     steps:
-      - name: Check out source repository
+      - name: Check out Git repository
         uses: actions/checkout@v2
-      - name: Set up Python environment
-        uses: actions/setup-python@v1
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
         with:
           python-version: 3.9
-      - name: flake8 Lint
-        uses: py-actions/flake8@v2
-        with:
-          ignore: "E203"
-          exclude: "migrations/"
-          max-line-length: "119"
-      - run: |
-          python -m pip install --upgrade pip
+
+      - name: Install Python dependencies
+        run: 
           pip install -r requirements.txt
+          pip install black flake8
+      - name: Run linters
+        uses: wearerequired/lint-action@v1
+        with:
+          black: true
+          flake8: true
+          auto_fix: true
+          black_args: "--line-length: 119"
+          flake8_args: "--max-line-length: 119"
