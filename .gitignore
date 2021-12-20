@@ -18,7 +18,6 @@ pyvenv.cfg
 # NPM
 
 # Logs
-logs
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -133,3 +132,17 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# vs code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
