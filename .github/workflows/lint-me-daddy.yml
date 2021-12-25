@@ -3,7 +3,7 @@ name: Lint
 on:
   # Trigger the workflow on push or pull request,
   # but only for the main branch
-  
+
   pull_request:
     branches:
       - main
@@ -22,7 +22,7 @@ jobs:
           python-version: 3.9
 
       - name: Install Python dependencies
-        run: 
+        run:
           pip install -r requirements.txt
           pip install black flake8
       - name: Run linters
@@ -30,5 +30,5 @@ jobs:
         with:
           black: true
           flake8: true
-          black_args: "--line-length 119"
+          black_args: "--line-length 119  --exclude migrations"
           flake8_args: "--max-line-length 119"
