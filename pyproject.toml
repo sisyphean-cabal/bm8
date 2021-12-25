@@ -1,0 +1,12 @@
+[tool.black]
+target-version = ['py36', 'py37', 'py38', py39']
+line-length = 119
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+default_section = "THIRDPARTY"
+known_first_party = []
+known_third_party = ["django", "phonenumber_field", "rest_framework"]
