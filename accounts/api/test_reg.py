@@ -17,9 +17,3 @@ class RegisterTest(TestCase):
         print(req.body)
         res = view(req)
         self.assertEqual(res.status_code, 400)
-
-    # def test_constraint(self):
-    #     user = User.object.create()
-    #     constraint_name = "accounts_user_email_or_phone_number"
-    #     with self.assertRaisesMessage(IntegrityError, constraint_name):
-    #         User.create(
