@@ -26,6 +26,13 @@ class ProfileTokenSerialzer(serializers.Serializer):
                 msg = _("Login credentials not found. Did you enter the correct email address of password?")
                 raise serializers.ValidationError(msg, code="authorization")
 
+        else:
+            msg = _("Must include email and password fields")
+            raise serializers.ValidationError(msg, code="authorization")
+
+        attrs["user"] = user
+        return attrs
+
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:

@@ -1,26 +1,44 @@
-from rest_framework import generics, parsers, renderers
+from rest_framework import generics
+from rest_framework.authtoken import views as auth_views
+from rest_framework.compat import coreapi, coreschema
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework.schemas import ManualSchema
 
-from accounts.api.serializers import RegistrationSerializer, UserSerializer
+from accounts.api.serializers import (
+    ProfileTokenSerialzer,
+    RegistrationSerializer,
+    UserSerializer,
+)
 from accounts.models import User
 
 
-class ObtainAuthToken(APIView):
-    throttle_classes = ()
-    permission_classes = ()
-    parser_classes = (
-        parsers.FormParser,
-        parsers.MultiPartParser,
-        parsers.JSONParser,
-    )
-
-    renderer_classes = renderers.JSONRenderer
-
-    def post(self, req):
-        alpha = "hello"
-        return alpha
+class UserAuthToken(auth_views.ObtainAuthToken):
+    serializer_class = ProfileTokenSerialzer
+    if coreapi is not None and coreschema is not None:
+        schema = ManualSchema(
+            fields=[
+                coreapi.Field(
+                    name="email",
+                    required=True,
+                    location="form",
+                    schema=coreschema.String(
+                        title="Email",
+                        description="Valid email for authentication",
+                    ),
+                ),
+                coreapi.Field(
+                    name="password",
+                    required=True,
+                    location="form",
+                    schema=coreschema.String(
+                        title="Password",
+                        description="Valid password for authentication",
+                    ),
+                ),
+            ],
+            encoding="application/json",
+        )
 
 
 @api_view(["POST"])
