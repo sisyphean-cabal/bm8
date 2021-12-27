@@ -1,6 +1,50 @@
+from django.contrib.auth import authenticate
+from django.utils.translation import gettext_lazy as _
+from phonenumber_field.serializerfields import PhoneNumberField
 from rest_framework import serializers
 
 from accounts.models import User
+
+
+class LoginTokenSerializer(serializers.Serializer):
+    email = serializers.EmailField(
+        label=_("Email"),
+        write_only=True,
+    )
+    phone_number = PhoneNumberField(
+        label=_("Phone number"),
+        trim_whitespace=False,
+        write_only=True,
+    )
+    password = serializers.CharField(
+        label=_("Password"),
+        style={"input_type": "password"},
+        trim_whitespace=False,
+        write_only=True,
+    )
+    token = serializers.CharField(label=_("Token"), read_only=True)
+
+    def validate(self, attrs):
+        email = attrs.get("email")
+        phone_number = attrs.get("phone_number")
+        password = attrs.get("password")
+
+        if email and password:
+            user = authenticate(request=self.context.get("request"), email=email, password=password)
+        if phone_number and password:
+            user = authenticate(request=self.context.get("request"), phone_number=phone_number, password=password)
+            # The authenticate call simply returns None for is_active=False
+            # users. (Assuming the default ModelBackend authentication
+            # backend.)
+            if not user:
+                msg = _("Unable to log in with provided credentials.")
+                raise serializers.ValidationError(msg, code="authorization")
+        else:
+            msg = _('Must include "username" and "password".')
+            raise serializers.ValidationError(msg, code="authorization")
+
+        attrs["user"] = user
+        return attrs
 
 
 class ProfileSerializer(serializers.ModelSerializer):
