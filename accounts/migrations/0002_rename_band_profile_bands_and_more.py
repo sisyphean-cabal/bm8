@@ -9,7 +9,5 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RenameField(model_name="profile", old_name="band", new_name="bands"),
-        migrations.RenameField(
-            model_name="profile", old_name="user", new_name="user_obj"
-        ),
+        migrations.RenameField(model_name="profile", old_name="user", new_name="user_obj"),
     ]
