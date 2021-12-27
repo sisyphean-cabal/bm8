@@ -31,7 +31,7 @@ class LoginTokenSerializer(serializers.Serializer):
 
         if email and password:
             user = authenticate(request=self.context.get("request"), email=email, password=password)
-        if phone_number and password:
+        elif phone_number and password:
             user = authenticate(request=self.context.get("request"), phone_number=phone_number, password=password)
             # The authenticate call simply returns None for is_active=False
             # users. (Assuming the default ModelBackend authentication
