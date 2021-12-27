@@ -22,43 +22,6 @@ class UserTokenLogin(ObtainAuthToken):
             }
         )
 
-    # serializer_class = ProfileTokenSerialzer
-    # if coreapi is not None and coreschema is not None:
-    #     schema = ManualSchema(
-    #         fields=[
-    #             coreapi.Field(
-    #                 name="email",
-    #                 required=True,
-    #                 location="form",
-    #                 schema=coreschema.String(
-    #                     title="Email",
-    #                     description="Valid email for authentication",
-    #                 ),
-    #             ),
-    #             coreapi.Field(
-    #                 name="phone_number",
-    #                 required=False,
-    #                 location="form",
-    #                 schema=coreschema.String(
-    #                     title="Phonenumber",
-    #                     description="Valid phone number for authentication",
-    #                 ),
-    #             ),
-    #             coreapi.Field(
-    #                 name="password",
-    #                 required=True,
-    #                 location="form",
-    #                 schema=coreschema.String(
-    #                     title="Password",
-    #                     description="Valid password for authentication",
-    #                 ),
-    #             ),
-    #         ],
-    #         encoding="application/json",
-    #     )
-    # else:
-    #     logging.error()
-
 
 @api_view(["POST"])
 def registration_view(req):
