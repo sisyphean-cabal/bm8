@@ -6,11 +6,12 @@ from accounts.models import User
 fake = Faker()
 
 
-class UserFct(factory.django.DjangoModelFactory):
+class UserFactory(factory.django.DjangoModelFactory):
 
     # user table
     class Meta:
-        model = User
+        model = User.objects.all
 
     phone_numer = fake.phone_number()
+    password = fake.password()
     email = fake.email()
