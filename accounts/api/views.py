@@ -36,7 +36,7 @@ class ObtainLoginToken(ObtainAuthToken):
                 ),
                 coreapi.Field(
                     name="phone_number",
-                    required=True,
+                    required=False,
                     location="form",
                     schema=coreschema.String(
                         title="phone_number",
