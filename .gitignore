@@ -3,6 +3,8 @@ data/db/*
 venv
 .vscode
 
+__init__.py
+
 *.pyc
 __pycache__
 
