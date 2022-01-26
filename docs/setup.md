@@ -11,7 +11,7 @@ https://www.python.org/downloads/
 
 4. Clone the repository to whatever folder you want, you don't need the frontend for now.
 
-5. use the following git command, and create a new branch for yourself. For now. We'll change it later.
+5. use the following git command, and create a new branch for yourself. The name doesn't matter, we'll change it later.
 
 > git checkout -b aeseop-setup
 
