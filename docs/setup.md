@@ -1,5 +1,5 @@
 ## Initial Downloads and Local Repository Setup
-1. Download VS Code if you haven't the terminal is extremely important, I'm assuming on Windows it emulates bash.
+1. Download VS Code if you haven't, as the terminal is extremely important. I'm assuming on Windows it emulates bash.
 https://code.visualstudio.com/
 
 2. Download Docker and Docker-compose
