@@ -16,7 +16,7 @@ https://www.python.org/downloads/
 > git checkout -b aeseop-setup
 
 ## Python and Docker
-1. navigate to the directory you cloned the project in, i guess in... powershell somehow?
+1. navigate to the directory you cloned the project in.
 
 2. Create a python virtual environment. If you don't know what this does it allows us to work with certain dependecies (addons) without affecting other projects. You should create one for every python project you make tbh.
 
