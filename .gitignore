@@ -2,6 +2,8 @@
 # TODO
 # clean up
 
+venv
+
 # docker volume for postgresql
 data/db/*
 .pytest_cache
