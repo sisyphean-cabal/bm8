@@ -1,6 +1,10 @@
+
+# TODO
+# clean up
+
 # docker volume for postgresql
 data/db/*
-
+.pytest_cache
 .vscode
 
 *.pyc
