@@ -26,7 +26,7 @@ https://www.python.org/downloads/
 
 This will activate the python virtual environment. You should notice the venv beside your username in the terminal.
 
-5. after it's activated, run the the following to install all of our necessary depenencies. Should handle everything form django to pythons lib for working with SQL.
+5. after it's activated, run the the following to install all of our necessary dependencies. Should install django and the requisite libraries (middleware, etc).
 
 > pip install -r requirements.txt
 
