@@ -24,7 +24,7 @@ https://www.python.org/downloads/
 
 > source /path/to/your/project/root/directory/venv/bin/activate.sh
 
-This will activate the python virtual environment. You should notice the venv beside your username in the terminal (or command prompt? idfk).
+This will activate the python virtual environment. You should notice the venv beside your username in the terminal.
 
 5. after it's activated, run the the following to install all of our necessary depenencies. Should handle everything form django to pythons lib for working with SQL.
 
