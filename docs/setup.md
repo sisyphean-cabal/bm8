@@ -28,7 +28,7 @@ This will activate the python virtual environment. You should notice the venv be
 
 5. after it's activated, run the the following to install all of our necessary depenencies. Should handle everything form django to pythons lib for working with SQL.
 
-> pip install -r requirements.txt and this will download all of our necessary dependencies.
+> pip install -r requirements.txt
 
 6. Run the command to build the project.
 
