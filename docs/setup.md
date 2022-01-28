@@ -18,7 +18,7 @@ https://www.python.org/downloads/
 ## Python and Docker
 1. navigate to the directory you cloned the project in.
 
-2. Create a python virtual environment. If you don't know what this does it allows us to work with certain dependecies (addons) without affecting other projects. You should create one for every python project you make tbh.
+2. Create a python virtual environment. This allows us to work with certain dependencies (addons) without affecting other projects' dependencies (effectively sandboxing projects). You can read more about these [here](https://docs.python.org/3/library/venv.html).
 
 > python3 -m venv /path/to/your/project/root/directory
 
