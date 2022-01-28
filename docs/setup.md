@@ -13,7 +13,7 @@ https://www.python.org/downloads/
 
 5. use the following git command, and create a new branch for yourself. The name doesn't matter, we'll change it later.
 
-> git checkout -b aeseop-setup
+> git checkout -b setup
 
 ## Python and Docker
 1. navigate to the directory you cloned the project in.
@@ -36,11 +36,21 @@ This will activate the python virtual environment. You should notice the venv be
 
 7. after that's done run docker-compose. You'll be using this from here on out.
 
+#### Docker Compose
+
+
 > docker-compose up.
 
-> (run docker-compose down if you ever need to stop it.)
+You no longer need to use docker build from here out. Everything will be handled through docker-compose.
 
-The project will set itself up and start running.
+This will start the project.
+> docker-compose up
+
+This will stop the project.
+> docker compose down
+
+In the event you need to completely set the project back up, then run docker build and docker-compose up again.
+
 
 8. In the VS Code terminal, you'll want to run
 
@@ -48,13 +58,15 @@ The project will set itself up and start running.
 
 > docker-compose exec django python manage.py migrate
 
-If neither of those things work. Flip them and migrate first then make migrations.
-
-From there, the database will be populated with the tables you need.
+These will populate the database with the tables you need.
 
 
 ## Setting up VS Code.
-At the top, file, save workspace as. Save it osmewhere outside of the project.
+Go into VS Code, at the top click file > save workspace as
+
+Save this outside of your project somewhere. MyDocuments would work. Name it something like bm8backend. This will allow you to organize your extensions on a per project basis.
+
+Download these extensions.
 
 * Docker
 * Django
