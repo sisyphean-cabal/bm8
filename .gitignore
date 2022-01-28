@@ -3,6 +3,7 @@
 # clean up
 
 venv
+bm8vemv
 
 # docker volume for postgresql
 data/db/*
