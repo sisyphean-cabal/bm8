@@ -1,12 +1,25 @@
-from django.contrib.auth.base_user import AbstractBaseUser
+from dataclasses import dataclass
+
+from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 
 
-class User(AbstractBaseUser):
-    email = models.CharField(max_length=200, null=True, blank=True, unique=True)
+class AbsUserManager(BaseUserManager):
+    def create_user(self, email, phone, password=None):
+        email = self.normalize_email(email)
+        user = self.model(email=email)
+        return user
+
+    def create_superuser(self, email_or_phone, password=None):
+        pass
+
+
+class AbsUserAccount(AbstractBaseUser):
+    email = models.EmailField(verbose_name="email", max_length=60, unique=True)
     phone_number = PhoneNumberField(null=True, blank=True, unique=True)
 
+    @dataclass
     class Meta:
         constraints = [
             models.CheckConstraint(
@@ -15,9 +28,8 @@ class User(AbstractBaseUser):
             )
         ]
 
-    def __str__(self):
-        return self.email
-
-
-class Profile(models.Model):
-    user_obj = models.OneToOneField(User, on_delete=models.CASCADE)
+        def __str__(self):
+            if self.email:
+                return self.email
+            else:
+                return self.phone_number
