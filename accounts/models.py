@@ -1,5 +1,6 @@
 import uuid
 from dataclasses import dataclass
+from tkinter import CASCADE
 
 from django import forms
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
@@ -14,8 +15,6 @@ UserIdentity
 ------------
 AbsUserManager needs to create the UUID for the user and store it in the
 identity table.
-
-AbsUserManager should point to UserEmail, UserPhoneNumber, and UserIdentity
 
 """
 
@@ -63,7 +62,7 @@ class AbsUserManager(BaseUserManager):
 
 class UserIdentity(models.Model):
     user_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    id_type = models.CharField(default="")
+    # id_type = models.CharField(default="")
 
     def __str__(self):
         return self.user_id
@@ -90,8 +89,9 @@ class AbsUserAccount(AbstractBaseUser):
                 return self.phone_number
 
 
-class UserPassword(models.Model):
+class UserCredentials(models.Model):
     password = forms.CharField(widget=forms.PasswordInput)
+    account = models.ForeignKey(AbstractBaseUser, on_delete=CASCADE)
 
     class Meta:
         model = AbsUserAccount
