@@ -6,13 +6,26 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 class AbsUserManager(BaseUserManager):
-    def create_user(self, email, phone_number, password=None):
-        email = self.normalize_email(email)
-        user_account = self.model(email=email, phone_number=phone_number)
-        phone_number = phone_number
-        user_account.set_password(password)
-        user_account.save()
-        return user_account
+    def create_user(self, email_or_phone, is_staff, is_superuser, password=None, **extra_fields):
+
+        if not email_or_phone:
+            raise ValueError("You must give either a email or phone number")
+
+        if "@" in email_or_phone:
+            email_or_phone = self.normalize_email(email_or_phone)
+            username, email, phone = (email_or_phone, email_or_phone, "")
+        else:
+            # TODO constraints and validation.
+            phone = email_or_phone
+
+        user = self.model(
+            user=username, email=email, phone=phone, is_staff=is_staff, is_superuser=is_superuser, **extra_fields
+        )
+
+        user.set_password(password)
+        user.save()
+
+        return user
 
     def create_superuser(self, email_or_phone, password=None):
         pass
