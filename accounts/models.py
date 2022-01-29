@@ -1,9 +1,10 @@
 import uuid
 from dataclasses import dataclass
 
+from django import forms
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.db import models
-from phonenumber_field import PhoneNumberField
+from phonenumber_field.modelfields import PhoneNumberField
 
 """
 TODO
@@ -14,6 +15,7 @@ UserIdentity
 AbsUserManager needs to create the UUID for the user and store it in the
 identity table.
 
+AbsUserManager should point to UserEmail, UserPhoneNumber, and UserIdentity
 
 """
 
@@ -61,17 +63,10 @@ class AbsUserManager(BaseUserManager):
 
 class UserIdentity(models.Model):
     user_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    identity_type = models.ManyToManyField(max_length=100)
-
-
-class UserEmail(models.Model):
-    email = models.EmailField(verbose_name="email", max_length=60, unique=True)
-
-    class Meta:
-        ordering = ["email"]
+    id_type = models.CharField(default="")
 
     def __str__(self):
-        return self.email
+        return self.user_id
 
 
 class AbsUserAccount(AbstractBaseUser):
@@ -93,3 +88,10 @@ class AbsUserAccount(AbstractBaseUser):
                 return self.email
             else:
                 return self.phone_number
+
+
+class UserPassword(models.Model):
+    password = forms.CharField(widget=forms.PasswordInput)
+
+    class Meta:
+        model = AbsUserAccount
