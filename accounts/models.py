@@ -6,7 +6,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 class AbsUserManager(BaseUserManager):
-    def create_user(self, email_or_phone, is_staff, is_superuser, password=None, **extra_fields):
+    def prep_create_user(self, email_or_phone, is_staff, is_superuser, password=None, **extra_fields):
 
         if not email_or_phone:
             raise ValueError("You must give either a email or phone number")
@@ -27,8 +27,11 @@ class AbsUserManager(BaseUserManager):
 
         return user
 
-    def create_superuser(self, email_or_phone, password=None):
-        pass
+    def create_user(self, email_or_phone, password=None, **extra_fields):
+        return self.prep_create_user(email_or_phone, False, False, password, **extra_fields)
+
+    def create_superuser(self, email_or_phone, password=None, **extra_fields):
+        return self.prep_create_user(email_or_phone, True, True, password, **extra_fields)
 
 
 class AbsUserAccount(AbstractBaseUser):
