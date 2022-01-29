@@ -51,6 +51,7 @@ class AbsUserAccount(AbstractBaseUser):
     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
     phone_number = PhoneNumberField(null=True, blank=True, unique=True)
     is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
 
     @dataclass
     class Meta:
