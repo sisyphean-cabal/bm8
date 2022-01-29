@@ -1,7 +1,9 @@
 import uuid
+from dataclasses import dataclass
 
-from django.contrib.auth.base_user import BaseUserManager
+from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.db import models
+from phonenumber_field import PhoneNumberField
 
 """
 TODO
@@ -62,22 +64,32 @@ class UserIdentity(models.Model):
     identity_type = models.ManyToManyField(max_length=100)
 
 
-# class AbsUserAccount(AbstractBaseUser):
-#     identity = models.OneToOneField(UserIdentity)
-#     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
-#     phone_number = PhoneNumberField(null=True, blank=True, unique=True)
+class UserEmail(models.Model):
+    email = models.EmailField(verbose_name="email", max_length=60, unique=True)
 
-#     @dataclass
-#     class Meta:
-#         constraints = [
-#             models.CheckConstraint(
-#                 name="%(app_label)s_%(class)s_email_or_phone_number",
-#                 check=(models.Q(phone_number__isnull=False) | models.Q(email__isnull=False)),
-#             )
-#         ]
+    class Meta:
+        ordering = ["email"]
 
-#         def __str__(self):
-#             if self.email:
-#                 return self.email
-#             else:
-#                 return self.phone_number
+    def __str__(self):
+        return self.email
+
+
+class AbsUserAccount(AbstractBaseUser):
+    identity = models.OneToOneField(UserIdentity)
+    email = models.EmailField(verbose_name="email", max_length=60, unique=True)
+    phone_number = PhoneNumberField(null=True, blank=True, unique=True)
+
+    @dataclass
+    class Meta:
+        constraints = [
+            models.CheckConstraint(
+                name="%(app_label)s_%(class)s_email_or_phone_number",
+                check=(models.Q(phone_number__isnull=False) | models.Q(email__isnull=False)),
+            )
+        ]
+
+        def __str__(self):
+            if self.email:
+                return self.email
+            else:
+                return self.phone_number
