@@ -1,6 +1,5 @@
 import uuid
 from dataclasses import dataclass
-from tkinter import CASCADE
 
 from django import forms
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
@@ -69,7 +68,7 @@ class UserIdentity(models.Model):
 
 
 class AbsUserAccount(AbstractBaseUser):
-    identity = models.OneToOneField(UserIdentity)
+    identity = models.ForeignKey(UserIdentity, on_delete=models.CASCADE)
     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
     phone_number = PhoneNumberField(null=True, blank=True, unique=True)
 
@@ -91,7 +90,4 @@ class AbsUserAccount(AbstractBaseUser):
 
 class UserCredentials(models.Model):
     password = forms.CharField(widget=forms.PasswordInput)
-    account = models.ForeignKey(AbstractBaseUser, on_delete=CASCADE)
-
-    class Meta:
-        model = AbsUserAccount
+    account = models.ForeignKey(AbsUserAccount, on_delete=models.CASCADE)
