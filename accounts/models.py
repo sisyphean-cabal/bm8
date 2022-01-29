@@ -8,9 +8,11 @@ from phonenumber_field.modelfields import PhoneNumberField
 class AbsUserManager(BaseUserManager):
     def create_user(self, email, phone_number, password=None):
         email = self.normalize_email(email)
+        user_account = self.model(email=email, phone_number=phone_number)
         phone_number = phone_number
-        user = self.model(email=email, phone_number=phone_number)
-        return user
+        user_account.set_password(password)
+        user_account.save()
+        return user_account
 
     def create_superuser(self, email_or_phone, password=None):
         pass
