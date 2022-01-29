@@ -1,8 +1,19 @@
-from dataclasses import dataclass
+import uuid
 
-from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.base_user import BaseUserManager
 from django.db import models
-from phonenumber_field.modelfields import PhoneNumberField
+
+"""
+TODO
+Remove password from AbsUserAccount.
+
+UserIdentity
+------------
+AbsUserManager needs to create the UUID for the user and store it in the
+identity table.
+
+
+"""
 
 
 class AbsUserManager(BaseUserManager):
@@ -20,14 +31,13 @@ class AbsUserManager(BaseUserManager):
 
         if "@" in email_or_phone:
             email_or_phone = self.normalize_email(email_or_phone)
-            username, email, phone = (email_or_phone, email_or_phone, "")
+            email, phone = (email_or_phone, "")
 
         else:
-            # TODO constraints and validation.
+            # validation is handled by the frontend atm
             phone = email_or_phone
 
         user = self.model(
-            user=username,
             email=email,
             phone=phone,
             is_staff=is_staff,
@@ -47,21 +57,27 @@ class AbsUserManager(BaseUserManager):
         return self.prep_create_user(email_or_phone, True, True, password, **extra_fields)
 
 
-class AbsUserAccount(AbstractBaseUser):
-    email = models.EmailField(verbose_name="email", max_length=60, unique=True)
-    phone_number = PhoneNumberField(null=True, blank=True, unique=True)
+class UserIdentity(models.Model):
+    user_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    identity_type = models.ManyToManyField(max_length=100)
 
-    @dataclass
-    class Meta:
-        constraints = [
-            models.CheckConstraint(
-                name="%(app_label)s_%(class)s_email_or_phone_number",
-                check=(models.Q(phone_number__isnull=False) | models.Q(email__isnull=False)),
-            )
-        ]
 
-        def __str__(self):
-            if self.email:
-                return self.email
-            else:
-                return self.phone_number
+# class AbsUserAccount(AbstractBaseUser):
+#     identity = models.OneToOneField(UserIdentity)
+#     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
+#     phone_number = PhoneNumberField(null=True, blank=True, unique=True)
+
+#     @dataclass
+#     class Meta:
+#         constraints = [
+#             models.CheckConstraint(
+#                 name="%(app_label)s_%(class)s_email_or_phone_number",
+#                 check=(models.Q(phone_number__isnull=False) | models.Q(email__isnull=False)),
+#             )
+#         ]
+
+#         def __str__(self):
+#             if self.email:
+#                 return self.email
+#             else:
+#                 return self.phone_number
