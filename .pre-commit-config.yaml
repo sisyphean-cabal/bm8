@@ -10,8 +10,9 @@ repos:
       - id: check-ast
       - id: name-tests-test
         args: ["--django"]
+        exclude: accounts/tests/factories
   - repo: https://github.com/psf/black
-    rev: 21.12b0
+    rev: 22.1.0
     hooks:
       - id: black
   - repo: https://github.com/asottile/seed-isort-config
@@ -30,7 +31,7 @@ repos:
           - flake8-black==0.2.3
         language_version: python3
   - repo: https://github.com/pycqa/bandit
-    rev: 1.7.1
+    rev: 1.7.2
     hooks:
       - id: bandit
         args: ['-iii', '-ll']

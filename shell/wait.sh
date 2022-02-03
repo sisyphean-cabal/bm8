@@ -2,10 +2,10 @@
 # wait-for-postgres.sh
 
 set -e
-  
+
 host="$1"
 shift
-  
+
 until ./shell/wait-for-it.sh "$host"; do
   >&2 echo "Postgres is unavailable - sleeping"
   sleep 1

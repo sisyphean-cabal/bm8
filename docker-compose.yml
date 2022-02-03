@@ -18,4 +18,3 @@ services:
         - POSTGRES_NAME=postgres
         - POSTGRES_USER=postgres
         - POSTGRES_PASSWORD=bm152612
-  
