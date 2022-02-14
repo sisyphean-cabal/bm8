@@ -1,8 +1,9 @@
 from rest_framework import generics
-from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
 from accounts.api.serializers import RegistrationSerializer, UserSerializer
-from accounts.models import User
+from accounts.models import AbsUserAccount
 
 
 @api_view(["POST"])
@@ -21,5 +22,5 @@ def registration_view(req):
 
 
 class RegisterLookUp(generics.ListAPIView):
-    queryset = User.objects.all()
+    queryset = AbsUserAccount.objects.all()
     serializer_class = UserSerializer

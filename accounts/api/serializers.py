@@ -1,10 +1,11 @@
 from rest_framework import serializers
-from accounts.models import User
+
+from accounts.models import AbsUserAccount
 
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = AbsUserAccount
         fields = (
             "username",
             "first_name",
@@ -26,7 +27,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
     password_confirmation = serializers.CharField(max_length=280)
 
     class Meta:
-        model = User
+        model = AbsUserAccount
         fields = ["email", "phone_number", "password", "password_confirmation"]
         extra_kwargs = {"password": {"write_only": True}}
 
@@ -36,7 +37,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
             keys["email"] = self.validated_data["email"]
         if "phone_number" in self.validated_data:
             keys["phone_number"] = self.validated_data["phone_number"]
-        account = User(**keys)
+        account = AbsUserAccount(**keys)
         password = self.validated_data["password"]
 
         account.set_password(password)
@@ -46,5 +47,5 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = AbsUserAccount
         fields = ("email", "phone_number", "password")
