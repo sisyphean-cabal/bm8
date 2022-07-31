@@ -4,6 +4,7 @@
 
 venv
 bm8vemv
+workspaces
 
 # docker volume for postgresql
 data/db/*

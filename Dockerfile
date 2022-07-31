@@ -3,7 +3,7 @@ FROM python:3
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-WORKDIR /usr/src/bm8_api
+WORKDIR /usr/src/bm8_api/
 
 # install dependencies
 RUN pip install --upgrade pip
