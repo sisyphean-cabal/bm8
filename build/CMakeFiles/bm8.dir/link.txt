@@ -1,0 +1,2 @@
+/usr/bin/ar qc libbm8.a CMakeFiles/bm8.dir/bm8.cpp.o
+/usr/bin/ranlib libbm8.a
